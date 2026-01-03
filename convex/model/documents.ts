@@ -1,4 +1,4 @@
-import { internalMutation, internalQuery } from "../_generated/server.js";
+import { internalMutation, internalQuery } from "../_generated/server";
 import { v } from "convex/values";
 
 export const insert = internalMutation({
