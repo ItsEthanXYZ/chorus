@@ -46,7 +46,14 @@ export const ingest = internalAction({
 export const search = internalAction({
   args: {
     query: v.string(),
-    filter: v.optional(v.record(v.string(), v.any())),
+    filter: v.optional(
+      v.object({
+        category: v.optional(v.string()),
+        source: v.optional(v.string()),
+        title: v.optional(v.string()),
+        chunkIndex: v.optional(v.number()),
+      }),
+    ),
   },
   handler: async (ctx, args) => {
     const embeddings = new OpenAIEmbeddings({
