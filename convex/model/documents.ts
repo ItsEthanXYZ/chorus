@@ -5,7 +5,15 @@ export const insert = internalMutation({
   args: {
     embedding: v.array(v.number()),
     text: v.string(),
-    metadata: v.any(),
+    service: v.string(),
+    library: v.string(),
+    version: v.string(),
+    category: v.string(),
+    sourceUrl: v.string(),
+    title: v.optional(v.string()),
+    chunkIndex: v.number(),
+    lastUpdated: v.number(),
+    metadata: v.optional(v.any()),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("documents", args);
