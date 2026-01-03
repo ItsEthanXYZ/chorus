@@ -9,6 +9,11 @@ export default defineSchema({
   }).vectorIndex("byEmbedding", {
     vectorField: "embedding",
     dimensions: 1536,
-    filterFields: ["metadata"],
+    filterFields: [
+      "metadata.category",
+      "metadata.source",
+      "metadata.title",
+      "metadata.chunkIndex",
+    ],
   }),
 });
