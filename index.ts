@@ -1,16 +1,11 @@
 import { OpenAIEmbeddings } from "@langchain/openai";
-
-const EMBEDDING_URL = "http://127.0.0.1:8080/v1";
+import { env } from "./convex/env";
 
 const embeddings = new OpenAIEmbeddings({
-  model: "qwen3-embedding",
-  configuration: {
-    baseURL: EMBEDDING_URL,
-  },
-  apiKey: "dummy",
+  apiKey: env.OPEN_AI_API_KEY,
+  model: "text-embedding-3-small",
 });
 
 const texts = ["LangChain is a framework", "It helps build AI apps"];
 const vectors = await embeddings.embedDocuments(texts);
 console.log(vectors);
-
