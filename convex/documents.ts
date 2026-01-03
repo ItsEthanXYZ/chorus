@@ -1,9 +1,7 @@
 "use node";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { internalAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { v } from "convex/values";
-import { env } from "./env";
 import { embedDocuments, embedQuery } from "./lib/embeddings";
 
 export const ingest = internalAction({
