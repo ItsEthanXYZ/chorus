@@ -10,6 +10,7 @@
 
 import type * as documents from "../documents.js";
 import type * as env from "../env.js";
+import type * as lib_embeddings from "../lib/embeddings.js";
 import type * as model_documents from "../model/documents.js";
 
 import type {
@@ -21,6 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   documents: typeof documents;
   env: typeof env;
+  "lib/embeddings": typeof lib_embeddings;
   "model/documents": typeof model_documents;
 }>;
 

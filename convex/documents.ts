@@ -4,6 +4,7 @@ import { internalAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { v } from "convex/values";
 import { env } from "./env";
+import { embedDocuments, embedQuery } from "./lib/embeddings";
 
 export const ingest = internalAction({
   args: {
@@ -15,13 +16,7 @@ export const ingest = internalAction({
     ),
   },
   handler: async (ctx, args) => {
-    const embeddings = new OpenAIEmbeddings({
-      model: "text-embedding-3-small",
-      apiKey: env.OPEN_AI_API_KEY,
-    });
-
-    const texts = args.documents.map((doc) => doc.text);
-    const vectors = await embeddings.embedDocuments(texts);
+    const vectors = await embedDocuments(args.documents.map((doc) => doc.text));
 
     const insertedIds: any[] = await Promise.all(
       args.documents.map(async (doc, index): Promise<any> => {
@@ -56,11 +51,7 @@ export const search = internalAction({
     ),
   },
   handler: async (ctx, args) => {
-    const embeddings = new OpenAIEmbeddings({
-      model: "text-embedding-3-small",
-      apiKey: env.OPEN_AI_API_KEY,
-    });
-    const queryVector = await embeddings.embedQuery(args.query);
+    const queryVector = await embedQuery(args.query);
 
     const searchOptions: any = {
       vector: queryVector,
